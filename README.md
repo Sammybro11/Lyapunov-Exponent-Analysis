@@ -1,1 +1,1 @@
-# Chaos_Measurement_of_Compound_Pendulum_with_Time_Variant_Lagrangian
+# Chaos Measurement of Compound Pendulum with Time Variant Lagrangian
