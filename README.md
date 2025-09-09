@@ -22,17 +22,19 @@ pip install -r requirements.txt
 
 ## Physics and Analysis
 
+### Hénon Maps
+
 We start with a relatively simple example called a
 [Hénon Map](https://en.wikipedia.org/wiki/H%C3%A9non_map). 
 The Hénon map is a discrete-time dynamical system. It is one of the most studied examples of dynamical systems that exhibit chaotic behavior. 
 
 The Hénon map takes a point ($x_n$, $y_n$) in the plane and maps it to a new point:
-$$
+```math
 \begin{cases}
 x_{n+1} &= 1 - ax^2_n + y_n \\
 y_n+1 &= bx_n
 \end{cases}
-$$
+```
 
 
 
