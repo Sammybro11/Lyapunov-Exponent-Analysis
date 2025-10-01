@@ -48,7 +48,7 @@ For a 2D map such as the Hénon system, there are two exponents $\lambda_1$ and 
 - If one is positive and the other negative, trajectories collapse onto a fractal attractor (strange attractor).  
 - Their sum satisfies:
   ```math
-  \lambda_1 + \lambda_2 = \ln |\det(J(x,y))|
+  \lambda_1 + \lambda_2 = \ln |\det(J\(x,y\))|
   ```
   where $J(x,y)$ is the Jacobian of the map. For Hénon, $\det(J) = -b$, so $\lambda_1 + \lambda_2 = \ln |b|$.  
 
