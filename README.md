@@ -81,12 +81,14 @@ Since divergence can lead to explosion in the length of these perturbation vecto
 2. At each iteration of the Hénon map:
    - Advance the point $(x,y)$ using the Hénon equations.  
    - Apply the Jacobian to the current basis and perform QR Decomposition: 
-     ```math
-     \begin{aligned}
-     W &= J(x,y) V \\
-     W &= QR
-     \end{aligned}
-     ```
+   
+```math
+ \begin{aligned}
+ W &= J(x,y) V \\
+ W &= QR
+ \end{aligned}
+```
+
      where $Q$ is orthonormal and $R$ is upper-triangular.  
    - The diagonal entries of $R$ represent the stretching factors along each direction before renormalization.  
    - Accumulate:  
