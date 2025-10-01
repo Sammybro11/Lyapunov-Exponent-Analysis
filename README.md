@@ -41,16 +41,16 @@ y_{n+1} &= bx_n
 
 The **Lyapunov exponents** measure the average exponential rate at which nearby trajectories separate (or converge).  
 
-For a 2D map such as the Hénon system, there are two exponents \(\lambda_1\) and \(\lambda_2\):  
+For a 2D map such as the Hénon system, there are two exponents $\lambda_1$ and $\lambda_2$:  
 
-- If \(\lambda_1 > 0\), the system is chaotic (sensitive dependence on initial conditions).  
+- If $\lambda_1 > 0$, the system is chaotic (sensitive dependence on initial conditions).  
 - If both exponents are negative, trajectories converge to a fixed point.  
 - If one is positive and the other negative, trajectories collapse onto a fractal attractor (strange attractor).  
 - Their sum satisfies:
   ```math
   \lambda_1 + \lambda_2 = \langle \ln |\det(J(x,y))| \rangle,
   ```
-  where \(J(x,y)\) is the Jacobian of the map. For Hénon, \(\det(J) = -b\), so \(\lambda_1 + \lambda_2 = \ln |b|\).  
+  where $J(x,y)$ is the Jacobian of the map. For Hénon, $\det(J) = -b$, so $\lambda_1 + \lambda_2 = \ln |b|$.  
 
 ---
 
@@ -72,49 +72,80 @@ We track the evolution of small perturbation vectors under this Jacobian. At eac
 \mathbf{u}' = J(x,y)\mathbf{u}
 ```
 
-The growth of these perturbations encodes the Lyapunov exponents.  
+The growth of these perturbations encodes the Lyapunov exponents.
+
+Since divergence can lead to explosion in the length of these perturbation vectors we apply the Modified Gram Schmidt Orthonormalization Numerical Method, 
+
+1. Start with an orthonormal basis of perturbation vectors $\{v_1, v_2\}$.  
+2. At each iteration of the Hénon map:
+   - Advance the point $(x,y)$ using the Hénon equations.  
+   - Apply the Jacobian to the current basis:  
+     ```math
+     W = J(x,y) V
+     ```
+     where $V = [v_1, v_2]$.  
+   - Perform QR decomposition:  
+     ```math
+     W = QR
+     ```
+     where $Q$ is orthonormal and $R$ is upper-triangular.  
+   - The diagonal entries of $R$ represent the stretching factors along each direction before renormalization.  
+   - Accumulate:  
+     ```math
+     \lambda_i \approx \frac{1}{N}\sum_{n=1}^N \ln |R_{ii}(n)|
+     ```  
+3. Replace $V \leftarrow Q$ and repeat.  
+
+This ensures numerical stability: vectors remain orthogonal, and exponential growth/decay is tracked through the logs of the $R$ diagonals. 
 
 ---
 
 #### Modified Gram Schmidt Numerical Method
 
-1. Start with an orthonormal basis of perturbation vectors \(\{v_1, v_2\}\).  
+1. Start with an orthonormal basis of perturbation vectors $\{v_1, v_2\}$.  
 2. At each iteration of the Hénon map:
-   - Advance the point \((x,y)\) using the Hénon equations.  
+   - Advance the point $(x,y)$ using the Hénon equations.  
    - Apply the Jacobian to the current basis:  
      ```math
      W = J(x,y) V
      ```
-     where \(V = [v_1, v_2]\).  
+     where $V = [v_1, v_2]$.  
    - Perform QR decomposition:  
      ```math
      W = QR
      ```
-     where \(Q\) is orthonormal and \(R\) is upper-triangular.  
-   - The diagonal entries of \(R\) represent the stretching factors along each direction before renormalization.  
+     where $Q$ is orthonormal and $R$ is upper-triangular.  
+   - The diagonal entries of $R$ represent the stretching factors along each direction before renormalization.  
    - Accumulate:  
      ```math
      \lambda_i \approx \frac{1}{N}\sum_{n=1}^N \ln |R_{ii}(n)|
      ```  
-3. Replace \(V \leftarrow Q\) and repeat.  
+3. Replace $V \leftarrow Q$ and repeat.  
 
-This algorithm ensures numerical stability: vectors remain orthogonal, and exponential growth/decay is tracked through the logs of the \(R\) diagonals.  
+This algorithm ensures numerical stability: vectors remain orthogonal, and exponential growth/decay is tracked through the logs of the $R$ diagonals.  
 
 ---
 
 ### Results  
 
-- **Heatmaps**: Figures 1 and 2 show the computed values of \(\lambda_1\) and \(\lambda_2\) across a grid of \((a,b)\) values.  
-  - Red regions (\(\lambda_1 > 0\)) correspond to chaotic dynamics.  
-  - Blue regions (\(\lambda_1 < 0\)) correspond to convergence to periodic or fixed points.  
+- **Heatmaps**: Figures 1 and 2 show the computed values of $\lambda_1$ and $\lambda_2$ across a grid of $(a,b)$ values.  
+  - Red regions ($\lambda_1 > 0$) correspond to chaotic dynamics.  
+  - Blue regions ($\lambda_1 < 0$) correspond to convergence to periodic or fixed points.  
   - Darker regions indicate divergence (trajectories escape to infinity).
 
-![Lambda_1](Plots/lyapunov_map_largest.png) ![Lambda_2](Plots/lyapunov_map_smallest.png)
+| Largest Lyapunov Exponent $\lambda_1$       | Smallest Lyapunov Exponent $\lambda_2$       |
+|---------------------------------------------|----------------------------------------------|
+| ![Lambda_1](Plots/lyapunov_map_largest.png) | ![Lambda_2](Plots/lyapunov_map_smallest.png) |
+
 
 - **GIFs**: Three animations illustrate how initial conditions evolve under different parameter choices:  
   1. **Convergence**: trajectories collapse to a fixed point.  
   2. **Divergence**: trajectories escape to infinity.  
   3. **Chaos**: trajectories settle onto a strange attractor with fractal geometry.  
+
+| Convergence                          | Chaos                         | Divergence                         |
+|--------------------------------------|-------------------------------|------------------------------------|
+| ![Convergence](Plots/Convergent.gif) | ![Chaos](Plots/Attractor.gif) | ![Divergence](Plots/Divergent.gif) |
 
 Together, these visualizations demonstrate how Lyapunov exponents capture the transition between order and chaos in the Hénon map. 
 
