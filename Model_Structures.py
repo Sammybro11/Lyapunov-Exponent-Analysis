@@ -6,7 +6,7 @@ def Create_Henon_Map(a, b):
     # Creates a discrete function of a Henon Map for a given parameters
 
     def Henon_Map(coords):
-        if abs(coords[0]) > 1e16 or abs(coords[1]) > 1e16:
+        if abs(coords[0]) > 1e100 or abs(coords[1]) > 1e100:
             return np.array([np.nan, np.nan])
         x_next = 1 - a * np.power(coords[0], 2) + coords[1]
         y_next = b*coords[0]
