@@ -48,7 +48,9 @@ For a 2D map such as the Hénon system, there are two exponents $\lambda_1$ and 
 - If one is positive and the other negative, trajectories collapse onto a fractal attractor (strange attractor).  
 - Their sum satisfies:
   ```math
+  \begin{equation}
   \lambda_1 + \lambda_2 = \langle \ln |\det(J(x,y))| \rangle,
+  \end{equation}
   ```
   where $J(x,y)$ is the Jacobian of the map. For Hénon, $\det(J) = -b$, so $\lambda_1 + \lambda_2 = \ln |b|$.  
 
@@ -81,48 +83,28 @@ Since divergence can lead to explosion in the length of these perturbation vecto
    - Advance the point $(x,y)$ using the Hénon equations.  
    - Apply the Jacobian to the current basis:  
      ```math
+     \begin{equation}
      W = J(x,y) V
+     \end{equation}
      ```
      where $V = [v_1, v_2]$.  
    - Perform QR decomposition:  
      ```math
+     \begin{equation}
      W = QR
+     \end{equation}
      ```
      where $Q$ is orthonormal and $R$ is upper-triangular.  
    - The diagonal entries of $R$ represent the stretching factors along each direction before renormalization.  
    - Accumulate:  
      ```math
+     \begin{equation}
      \lambda_i \approx \frac{1}{N}\sum_{n=1}^N \ln |R_{ii}(n)|
+     \end{equation}
      ```  
 3. Replace $V \leftarrow Q$ and repeat.  
 
 This ensures numerical stability: vectors remain orthogonal, and exponential growth/decay is tracked through the logs of the $R$ diagonals. 
-
----
-
-#### Modified Gram Schmidt Numerical Method
-
-1. Start with an orthonormal basis of perturbation vectors $\{v_1, v_2\}$.  
-2. At each iteration of the Hénon map:
-   - Advance the point $(x,y)$ using the Hénon equations.  
-   - Apply the Jacobian to the current basis:  
-     ```math
-     W = J(x,y) V
-     ```
-     where $V = [v_1, v_2]$.  
-   - Perform QR decomposition:  
-     ```math
-     W = QR
-     ```
-     where $Q$ is orthonormal and $R$ is upper-triangular.  
-   - The diagonal entries of $R$ represent the stretching factors along each direction before renormalization.  
-   - Accumulate:  
-     ```math
-     \lambda_i \approx \frac{1}{N}\sum_{n=1}^N \ln |R_{ii}(n)|
-     ```  
-3. Replace $V \leftarrow Q$ and repeat.  
-
-This algorithm ensures numerical stability: vectors remain orthogonal, and exponential growth/decay is tracked through the logs of the $R$ diagonals.  
 
 ---
 
