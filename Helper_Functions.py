@@ -39,7 +39,9 @@ def Gram_Schmidt_Orthonormalization(vector_matrix: np.ndarray) -> tuple[np.ndarr
             projection_matrix[i, j] += correction
 
         projection_matrix[j, j] = np.linalg.norm(working_matrix[:, j])
-        if projection_matrix[j, j] < 1e-10: raise ValueError(f"Column {j} had a linear dependent vector making the remaining vector zero")
+        if projection_matrix[j, j] < 1e-14:
+            # raise ValueError(f"Column {j} had a linear dependent vector making the remaining vector zero")
+            projection_matrix[j, j] = 1e-14
         ortho_matrix[:, j] = working_matrix[:, j]/projection_matrix[j, j]
 
     return ortho_matrix, projection_matrix
