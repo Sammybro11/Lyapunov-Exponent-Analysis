@@ -1,6 +1,6 @@
 import numpy as np
-from Model_Structures import DoublePendulum, Create_Henon_Map
-from Helper_Functions import rk4_step, Gram_Schmidt_Orthonormalization
+from src.Model_Structures import DoublePendulum, Create_Henon_Map
+from src.Helper_Functions import rk4_step, Gram_Schmidt_Orthonormalization
 from tqdm import tqdm
 
 def Lyapunov_Exponent_Henon(a, b):

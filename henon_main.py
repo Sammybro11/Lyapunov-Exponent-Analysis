@@ -1,8 +1,8 @@
 
 import numpy as np
-from Lyapunov import Lyapunov_Exponent_Henon
-from graphing import Henon_Graph, Henon_Simulation
-from Model_Structures import Create_Henon_Map
+from src.Lyapunov import Lyapunov_Exponent_Henon
+from src.graphing import Henon_Graph, Henon_Simulation
+from src.Model_Structures import Create_Henon_Map
 from tqdm import tqdm
 
 a_vals = np.linspace(1.2, 1.5, 61)
