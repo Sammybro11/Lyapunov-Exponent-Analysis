@@ -10,12 +10,12 @@ b_vals = np.linspace(0.18, 0.38, 41)
 
 results = []
 
-for a in tqdm(a_vals):
-    for b in b_vals:
-        lyap = Lyapunov_Exponent_Henon(a, b)
-        results.append({"a": np.round(a,3), "b": np.round(b,3), "l1": lyap[0], "l2": lyap[1]})
-
-Henon_Graph(results)
+# for a in tqdm(a_vals):
+#     for b in b_vals:
+#         lyap = Lyapunov_Exponent_Henon(a, b)
+#         results.append({"a": np.round(a,3), "b": np.round(b,3), "l1": lyap[0], "l2": lyap[1]})
+#
+# Henon_Graph(results)
 
 # Creating Animations for different starting conditions
 
@@ -23,16 +23,16 @@ a = 1.5
 b = 0.35
 Henon_Func = Create_Henon_Map(a, b)
 
-Henon_Sim = Henon_Simulation(Henon_Func, 40, 100, "Divergent", "Divergent (a = 1.5 b = 0.35)")
+Henon_Sim = Henon_Simulation(Henon_Func, 40, 500, "Divergent", "Divergent (a = 1.5 b = 0.35)")
 
 a = 1.4
 b = 0.3
 Henon_Func = Create_Henon_Map(a, b)
 
-Henon_Sim = Henon_Simulation(Henon_Func, 40, 100, "Attractor", "Chaotic Attractor (a = 1.4 b = 0.3)")
+Henon_Sim = Henon_Simulation(Henon_Func, 40, 500, "Attractor", "Chaotic Attractor (a = 1.4 b = 0.3)")
 
-a = 1.245
-b = 0.265
+a = 1.44
+b = 0.215
 Henon_Func = Create_Henon_Map(a, b)
 
-Henon_Sim = Henon_Simulation(Henon_Func, 40, 100, "Convergent", "Convergent (a = 1.245 b = 0.265)")
+Henon_Sim = Henon_Simulation(Henon_Func, 40, 500, "Convergent", "Convergent (a = 1.44 b = 0.215)")
