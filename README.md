@@ -49,9 +49,7 @@ For a 2D map such as the Hénon system, there are two exponents $\lambda_1$ and 
 - Their sum satisfies:
 
 ```math
-  \begin{cases}
-  \lambda_1 + \lambda_2 &=  \ln |\det(J\(x,y\))|
-  \end{cases}
+  \lambda_1 + \lambda_2 =  \ln |\det(J(x,y))|
 ```
   where $J(x,y)$ is the Jacobian of the map. For Hénon, $\det(J) = -b$, so $\lambda_1 + \lambda_2 = \ln |b|$.  
 
