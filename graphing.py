@@ -8,7 +8,7 @@ def Henon_Graph(results):
     df = pd.DataFrame(results)
 
     cmap = plt.cm.coolwarm.copy()
-    cmap.set_bad(color="#8B0000")  # NaN entries will be dark red
+    cmap.set_bad(color="#965151")  # NaN entries will be dark red
 
     pivot_table = df.pivot(index="a", columns="b", values="l1")
 
@@ -24,7 +24,7 @@ def Henon_Graph(results):
     plt.show()
 
     cmap = plt.cm.coolwarm.copy()
-    cmap.set_bad(color="#191970")  # NaN entries will be dark blue
+    cmap.set_bad(color="#4A4A8F")  # NaN entries will be dark blue
 
     pivot_table = df.pivot(index="a", columns="b", values="l2")
 
@@ -42,7 +42,7 @@ def Henon_Graph(results):
     plt.savefig("Plots/lyapunov_map_smallest.png", dpi=500)
     plt.show()
 
-def Henon_Simulation(Map, iterations, number_points, name):
+def Henon_Simulation(Map, iterations, number_points, name, title):
     initial_points = np.random.uniform(low=[-1.5, -0.5], high=[1.5, 0.5], size=(number_points, 2))
     time_series = [initial_points.copy()]
     points = initial_points.copy()
@@ -61,7 +61,7 @@ def Henon_Simulation(Map, iterations, number_points, name):
 
     # Create a "legend" text object, adjust transform for upper right
     legend_text = ax.text(
-        x_max, y_max, "", va='top', ha='right', fontsize=12, color="darkblue")
+        x_max-0.05, y_max-0.025, "", va='top', ha='right', fontsize=12, color="darkblue")
 
     def update(frame):
         pts = time_series[frame]
@@ -73,7 +73,7 @@ def Henon_Simulation(Map, iterations, number_points, name):
         )
         num_in_bounds = np.sum(mask)
         legend_text.set_text(f"Points in bounds: {num_in_bounds}")
-        ax.set_title(f'Henon Iteration {frame}')
+        ax.set_title(f'{title}', fontsize=16)
         return scat, legend_text
 
     ani = FuncAnimation(fig, update, frames=len(time_series), interval=300, blit=True)

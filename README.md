@@ -48,9 +48,9 @@ For a 2D map such as the Hénon system, there are two exponents $\lambda_1$ and 
 - If one is positive and the other negative, trajectories collapse onto a fractal attractor (strange attractor).  
 - Their sum satisfies:
   ```math
-  \begin{align}
+  \begin{aligned}
   \lambda_1 + \lambda_2 &= \langle \ln |\det(J(x,y))| \rangle
-  \end{align}
+  \end{aligned}
   ```
   where $J(x,y)$ is the Jacobian of the map. For Hénon, $\det(J) = -b$, so $\lambda_1 + \lambda_2 = \ln |b|$.  
 
@@ -83,10 +83,10 @@ Since divergence can lead to explosion in the length of these perturbation vecto
    - Advance the point $(x,y)$ using the Hénon equations.  
    - Apply the Jacobian to the current basis and perform QR Decomposition: 
      ```math
-     \begin{align}
+     \begin{aligned}
      W &= J(x,y) V \\
      W &= QR
-     \end{align}
+     \end{aligned}
      ```
      where $Q$ is orthonormal and $R$ is upper-triangular.  
    - The diagonal entries of $R$ represent the stretching factors along each direction before renormalization.  

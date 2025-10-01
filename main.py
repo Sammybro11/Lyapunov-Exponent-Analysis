@@ -6,7 +6,7 @@ from Model_Structures import Create_Henon_Map
 from tqdm import tqdm
 
 a_vals = np.linspace(1.2, 1.5, 61)
-b_vals = np.linspace(0.15, 0.35, 41)
+b_vals = np.linspace(0.18, 0.38, 41)
 
 results = []
 
@@ -23,4 +23,16 @@ a = 1.5
 b = 0.35
 Henon_Func = Create_Henon_Map(a, b)
 
-Henon_Sim = Henon_Simulation(Henon_Func, 30, 100, "Divergent")
+Henon_Sim = Henon_Simulation(Henon_Func, 40, 100, "Divergent", "Divergent (a = 1.5 b = 0.35)")
+
+a = 1.4
+b = 0.3
+Henon_Func = Create_Henon_Map(a, b)
+
+Henon_Sim = Henon_Simulation(Henon_Func, 40, 100, "Attractor", "Chaotic Attractor (a = 1.4 b = 0.3)")
+
+a = 1.245
+b = 0.265
+Henon_Func = Create_Henon_Map(a, b)
+
+Henon_Sim = Henon_Simulation(Henon_Func, 40, 100, "Convergent", "Convergent (a = 1.245 b = 0.265)")
