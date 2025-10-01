@@ -49,7 +49,7 @@ For a 2D map such as the Hénon system, there are two exponents $\lambda_1$ and 
 - Their sum satisfies:
   ```math
   \begin{align}
-  \lambda_1 + \lambda_2 &= \\langle \ln |\det(J(x,y))| \\rangle
+  \lambda_1 + \lambda_2 &= \langle \ln |\det(J(x,y))| \rangle
   \end{align}
   ```
   where $J(x,y)$ is the Jacobian of the map. For Hénon, $\det(J) = -b$, so $\lambda_1 + \lambda_2 = \ln |b|$.  
@@ -78,21 +78,15 @@ The growth of these perturbations encodes the Lyapunov exponents.
 
 Since divergence can lead to explosion in the length of these perturbation vectors we apply the Modified Gram Schmidt Orthonormalization Numerical Method, 
 
-1. Start with an orthonormal basis of perturbation vectors $\{v_1, v_2\}$.  
+1. Start with an orthonormal basis of perturbation vectors $V =\{v_1, v_2\}$.  
 2. At each iteration of the Hénon map:
    - Advance the point $(x,y)$ using the Hénon equations.  
-   - Apply the Jacobian to the current basis:  
+   - Apply the Jacobian to the current basis and perform QR Decomposition: 
      ```math
-     \begin{equation}
-     W = J(x,y) V
-     \end{equation}
-     ```
-     where $V = [v_1, v_2]$.  
-   - Perform QR decomposition:  
-     ```math
-     \begin{equation}
-     W = QR
-     \end{equation}
+     \begin{align}
+     W &= J(x,y) V \\
+     W &= QR
+     \end{align}
      ```
      where $Q$ is orthonormal and $R$ is upper-triangular.  
    - The diagonal entries of $R$ represent the stretching factors along each direction before renormalization.  
