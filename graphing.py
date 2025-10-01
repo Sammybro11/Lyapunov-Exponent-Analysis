@@ -43,6 +43,7 @@ def Henon_Graph(results):
     plt.show()
 
 def Henon_Simulation(Map, iterations, number_points, name, title):
+    np.random.seed(67)
     initial_points = np.random.uniform(low=[-1.5, -0.5], high=[1.5, 0.5], size=(number_points, 2))
     time_series = [initial_points.copy()]
     points = initial_points.copy()
