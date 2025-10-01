@@ -88,15 +88,16 @@ Since divergence can lead to explosion in the length of these perturbation vecto
  W &= QR
  \end{aligned}
 ```
-
-     where $Q$ is orthonormal and $R$ is upper-triangular.  
+      
    - The diagonal entries of $R$ represent the stretching factors along each direction before renormalization.  
-   - Accumulate:  
-     ```math
+   - Accumulate:
+
+```math
      \begin{equation}
      \lambda_i \approx \frac{1}{N}\sum_{n=1}^N \ln |R_{ii}(n)|
      \end{equation}
-     ```  
+```  
+
 3. Replace $V \leftarrow Q$ and repeat.  
 
 This ensures numerical stability: vectors remain orthogonal, and exponential growth/decay is tracked through the logs of the $R$ diagonals. 
