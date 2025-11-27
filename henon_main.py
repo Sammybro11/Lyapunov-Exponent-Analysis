@@ -1,6 +1,5 @@
-
 import numpy as np
-from src.Lyapunov import Lyapunov_Exponent_Henon
+from src.Lyapunov import Lyapunov_Exponent_Henon, Batched_Lyapunov_Exponent_Henon
 from src.graphing import Henon_Graph, Henon_Simulation
 from src.Model_Structures import Create_Henon_Map
 from tqdm import tqdm
@@ -10,12 +9,17 @@ b_vals = np.linspace(0.18, 0.38, 41)
 
 results = []
 
-# for a in tqdm(a_vals):
+# # Unbatched Method
+# for a in tqdm(a_vals, desc = "Finding Lyapunov Exponents (Slow Process)"):
 #     for b in b_vals:
 #         lyap = Lyapunov_Exponent_Henon(a, b)
 #         results.append({"a": np.round(a,3), "b": np.round(b,3), "l1": lyap[0], "l2": lyap[1]})
-#
-# Henon_Graph(results)
+
+# Batched Method
+results = Batched_Lyapunov_Exponent_Henon(a_vals, b_vals, batch_size = 4096)
+
+
+Henon_Graph(results)
 
 # Creating Animations for different starting conditions
 
