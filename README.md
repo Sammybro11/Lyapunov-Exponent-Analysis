@@ -5,19 +5,17 @@ chaotic systems and analysis on the chaotic nature
 observed in them using Lyapunov Exponent.
 
 ### Implementation
-**Installation**
+**Installation (uses [uv](https://docs.astral.sh/uv/))**
 ```
-git clone https://github.com/Sammybro11/Chaos-using-Lyapunov 
+git clone https://github.com/Sammybro11/Chaos-using-Lyapunov
 cd Chaos-using-Lyapunov
+uv sync
 ```
-**Python Virtual Environment**
+
+**Running**
 ```
-python3 -m venv env
-source env/bin/activate
-```
-**Installing required Packages**
-```
-pip install -r requirements.txt
+uv run python -m simulations.henon_main
+uv run python -m simulations.peter_main
 ```
 
 
