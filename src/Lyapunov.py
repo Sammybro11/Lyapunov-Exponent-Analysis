@@ -1,5 +1,5 @@
 import numpy as np
-from models.Model_Structures import Create_Henon_Map
+from models.Model_Structures import Create_Henon_Map, Create_Peter_Map
 import torch
 
 EPS = 1e-10
@@ -109,5 +109,37 @@ def Lyapunov_Exponent_Henon(a, b):
 
     return sum_log/n_iterations
 
+def Lyapunov_Exponent_Peter(a, b, c, d):
+    Map = Create_Peter_Map(a, b, c, d)
+
+    coords = np.array([0.2, 0.2])
+    perturbation_vectors = np.eye(2, dtype=float)
+
+    sum_log = np.zeros(2, dtype = float)
+    transient = 3000
+    n_iterations = 5000
+
+    for _ in range(transient):
+        coords = Map(coords)
+
+    for _ in range(n_iterations):
+        coords = Map(coords)
+
+        x, y = coords
+        Jacobian = np.array([[b * np.sin(b * x), a * np.cos(a * y)],
+                    [c * np.cos(c * x), d * np.sin(d * y)]], dtype=float)
+        perturbation = Jacobian @ perturbation_vectors
+
+        Q, R = np.linalg.qr(perturbation)
+
+        diag = np.maximum(np.abs(np.diag(R)), EPS)
+        sum_log += np.log(diag)
+
+        perturbation_vectors = Q
+
+    return sum_log/n_iterations
+
+
 if __name__ == "__main__":
     print("Henon (a=1.4, b=0.3):", Lyapunov_Exponent_Henon(1.4, 0.3))
+    print("Peter (a=1.4, b=-2.3, c=2.4, d=-2.1):", Lyapunov_Exponent_Peter(1.4, -2.3, 2.4, -2.1))

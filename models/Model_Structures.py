@@ -27,9 +27,12 @@ def Create_Henon_Map(a, b, batched = False):
         return Henon_Map
 
 def Create_Peter_Map(a, b, c, d):
+    # Canonical Peter de Jong map:
+    # x' = sin(a*y) - cos(b*x), y' = sin(c*x) - cos(d*y)
+
     def Peter_Jong(coords):
-        x_next = np.sin(a * coords[1]) - np.cos(b*coords[0])
-        y_next = np.sin(c * coords[1]) - np.cos(d*coords[0])
+        x_next = np.sin(a * coords[1]) - np.cos(b * coords[0])
+        y_next = np.sin(c * coords[0]) - np.cos(d * coords[1])
 
         return np.array([x_next, y_next])
     return Peter_Jong

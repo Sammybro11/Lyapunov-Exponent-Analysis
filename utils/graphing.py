@@ -42,18 +42,15 @@ def Henon_Graph(results):
     plt.savefig("Plots/lyapunov_map_smallest.png", dpi=500)
     plt.show()
 
-def Henon_Simulation(Map, iterations, number_points, name, title):
+def Map_Simulation(Map, iterations, number_points, name, title, bounds=(-1.5, 1.5, -0.5, 0.5)):
     np.random.seed(67)
-    initial_points = np.random.uniform(low=[-1.5, -0.5], high=[1.5, 0.5], size=(number_points, 2))
+    x_min, x_max, y_min, y_max = bounds
+    initial_points = np.random.uniform(low=[x_min, y_min], high=[x_max, y_max], size=(number_points, 2))
     time_series = [initial_points.copy()]
     points = initial_points.copy()
     for _ in range(iterations):
         points = np.array([Map(pt) for pt in points])
         time_series.append(points.copy())
-
-    # Set plot bounds
-    x_min, x_max = -1.5, 1.5
-    y_min, y_max = -0.5, 0.5
 
     fig, ax = plt.subplots(figsize=(6, 6))
     scat = ax.scatter(time_series[0][:, 0], time_series[0][:, 1], s=2, c='blue')
@@ -82,3 +79,16 @@ def Henon_Simulation(Map, iterations, number_points, name, title):
     ani.save(f'Plots/{name}.gif', writer='pillow', fps=2)  # Try changing fps
 
     plt.close(fig)
+
+def Peter_Attractor(Map, iterations, name, title):
+    coords = np.array([0.2, 0.2])
+    trajectory = np.empty((iterations, 2))
+    for i in range(iterations):
+        coords = Map(coords)
+        trajectory[i] = coords
+
+    plt.figure(figsize=(8, 8))
+    plt.scatter(trajectory[:, 0], trajectory[:, 1], s=0.1, c='black', marker='.')
+    plt.title(title, fontsize=16)
+    plt.savefig(f"Plots/{name}.png", dpi=500)
+    plt.close()

@@ -128,5 +128,23 @@ Together, these visualizations demonstrate how Lyapunov exponents capture the tr
 
 ### Peter De Jong Maps
 
+The [Peter de Jong map](https://en.wikipedia.org/wiki/Peter_de_Jong_map) is another discrete-time
+2D map, built from trigonometric terms:
+```math
+\begin{cases}
+x_{n+1} &= \sin(a y_n) - \cos(b x_n) \\
+y_{n+1} &= \sin(c x_n) - \cos(d y_n)
+\end{cases}
+```
+
+Unlike the Hénon map, orbits stay bounded (the map is a sum of sines and cosines), so there are no
+divergent regions. The same QR-based Jacobian method gives its Lyapunov exponents; for the classic
+parameters $a=1.4,\ b=-2.3,\ c=2.4,\ d=-2.1$ the system is chaotic ($\lambda_1 \approx 0.50$) and
+the orbit traces a fractal strange attractor:
+
+| Peter de Jong Attractor |
+|-------------------------|
+| ![Peter de Jong Attractor](Plots/peter_attractor.png) |
+
 
 
