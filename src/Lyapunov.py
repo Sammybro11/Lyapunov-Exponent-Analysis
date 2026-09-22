@@ -1,7 +1,5 @@
 import numpy as np
-from src.Model_Structures import DoublePendulum, Create_Henon_Map, Create_Peter_Map
-from src.Helper_Functions import rk4_step, Gram_Schmidt_Orthonormalization
-from tqdm import tqdm
+from models.Model_Structures import Create_Henon_Map
 import torch
 
 EPS = 1e-10
@@ -102,7 +100,6 @@ def Lyapunov_Exponent_Henon(a, b):
                     [b, 0]], dtype=float)
         perturbation = Jacobian @ perturbation_vectors
 
-        # Q, R = Gram_Schmidt_Orthonormalization(perturbation)
         Q, R = np.linalg.qr(perturbation)
 
         diag = np.maximum(np.abs(np.diag(R)), EPS) # Norm of each vector before normalization, the "stretch"
@@ -112,11 +109,5 @@ def Lyapunov_Exponent_Henon(a, b):
 
     return sum_log/n_iterations
 
-def Lyapunov_Exponent_Peter(a, b, c, d):
-    Map = Create_Peter_Map(a, b, c, d)
-
-
 if __name__ == "__main__":
-    Lyapunov_Exponent_Henon(1.44, 0.2)
-
-
+    print("Henon (a=1.4, b=0.3):", Lyapunov_Exponent_Henon(1.4, 0.3))
